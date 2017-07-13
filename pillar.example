@@ -6,10 +6,16 @@ backupninja:
 
   actions:
     10-stop-services.sh:
-      # TODO
+      stop_services:
+        - postfix
+        - dovecot
+    11-custom.sh: |
+      sleep 1  # your shell code here
     20-db1.mysql:
       # TODO
     30-start-services.sh:
-      # TODO
+      start_services:
+        - dovecot
+        - postfix
     40-transfer.rsync:
       # TODO

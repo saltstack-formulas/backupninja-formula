@@ -1,0 +1,4 @@
+set +e
+{% for service in services -%}
+invoke-rc.d {{ service }} start
+{% endfor -%}

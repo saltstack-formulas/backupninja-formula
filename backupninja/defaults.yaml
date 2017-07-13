@@ -7,6 +7,7 @@ backupninja:
   # Install necessary packages manually
   additional_pkgs: []
   configfile: '/etc/backupninja.conf'
+  executable: /usr/sbin/backupninja
   config:
     loglevel: 4
     reportemail: root
