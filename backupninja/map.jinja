@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'backupninja/defaults.yaml' as default_settings %}
+
+{##
+Setup variable using grains['os_family'] based logic, only add key:values here
+that differ from whats in defaults.yaml
+##}
+{% set os_family_map = salt['grains.filter_by']({
+        'Debian': {},
+        'Suse': {},
+        'Arch': {},
+        'RedHat': {},
+        'FreeBSD': {},
+  }
+  , grain="os_family"
+  , merge=salt['pillar.get']('backupninja:lookup'))
+%}
+{## Merge the flavor_map to the default settings ##}
+{% do default_settings.backupninja.update(os_family_map) %}
+
+{## Merge in backupninja:lookup pillar ##}
+{% set backupninja = salt['pillar.get'](
+        'backupninja',
+        default=default_settings.backupninja,
+        merge=True
+    )
+%}

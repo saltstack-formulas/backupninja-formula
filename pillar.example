@@ -1,0 +1,15 @@
+# vim: ft=yaml
+
+backupninja:
+  lookup:
+    pkg: backupninja
+
+  actions:
+    10-stop-services.sh:
+      # TODO
+    20-db1.mysql:
+      # TODO
+    30-start-services.sh:
+      # TODO
+    40-transfer.rsync:
+      # TODO
