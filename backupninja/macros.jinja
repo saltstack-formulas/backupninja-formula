@@ -1,0 +1,10 @@
+{%  macro render_options(data) -%}
+{%    for key, value in data | dictsort 
+        %}{{ key }}{%
+        if key|upper == key %}={% else %} = {% endif %}{%
+        if value is sameas True %}yes{%
+        elif value is sameas False %}no{%
+        else %}{{ value }}{%
+        endif %}
+{%    endfor %}
+{%- endmacro %}

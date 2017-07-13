@@ -13,7 +13,12 @@ that differ from whats in defaults.yaml
         'Suse': {},
         'Arch': {},
         'RedHat': {},
-        'FreeBSD': {},
+        'FreeBSD': {
+          'configfile': '/usr/local/etc/backupninja.conf',
+          'config': {
+            'configdirectory': '/usr/local/etc/backup.d',
+          }
+        },
   }
   , grain="os_family"
   , merge=salt['pillar.get']('backupninja:lookup'))

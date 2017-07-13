@@ -5,8 +5,9 @@
 
 backupninja-config:
   file.managed:
-    - name: {{ backupninja.config }}
+    - name: {{ backupninja.configfile }}
     - source: salt://backupninja/files/backupninja.conf.jinja
+    - template: jinja
     - mode: 644
     - user: root
     - group: root

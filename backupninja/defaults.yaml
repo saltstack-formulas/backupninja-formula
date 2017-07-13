@@ -2,4 +2,26 @@
 # vim: ft=yaml
 backupninja:
   pkg: backupninja
-  config: '/etc/backupninja.conf'
+  # Don't clutter the system with stuff you may never need
+  install_recommends: False
+  # Install necessary packages manually
+  additional_pkgs: []
+  configfile: '/etc/backupninja.conf'
+  config:
+    loglevel: 4
+    reportemail: root
+    reportsuccess: yes
+    reportinfo: no
+    reportwarning: yes
+    reportspace: no
+    reporthost: ''
+    reportuser: ninja
+    reportdirectory: /var/lib/backupninja/reports
+    admingroup: root
+    logfile: /var/log/backupninja.log
+    configdirectory: /etc/backup.d
+    scriptdirectory: /usr/share/backupninja
+    libdirectory: /usr/lib/backupninja
+    usecolors: yes
+    when: everyday at 01:00
+    vservers: no
