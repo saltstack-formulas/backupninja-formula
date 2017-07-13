@@ -1,5 +1,5 @@
 {% from "backupninja/map.jinja" import backupninja with context -%}
-{% from "backupninja/macros.jinja" import render_options with context -%}
+{% from "backupninja/macros.jinja" import render_ini_options with context -%}
 #
 #                          |\_
 # B A C K U P N I N J A   /()/
@@ -95,4 +95,4 @@
 # VSERVER=/usr/sbin/vserver
 # VROOTDIR=/var/lib/vservers
 
-{{ render_options(backupninja.config) }}
+{{ render_ini_options(backupninja.config) }}

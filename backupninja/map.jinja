@@ -21,16 +21,12 @@ that differ from whats in defaults.yaml
           'executable': '/usr/local/sbin/backupninja',
         },
   }
-  , grain="os_family"
-  , merge=salt['pillar.get']('backupninja:lookup'))
+  , grain="os_family")
 %}
-{## Merge the flavor_map to the default settings ##}
-{% do default_settings.backupninja.update(os_family_map) %}
 
-{## Merge in backupninja:lookup pillar ##}
-{% set backupninja = salt['pillar.get'](
-        'backupninja',
-        default=default_settings.backupninja,
-        merge=True
-    )
-%}
+{% set defaults = default_settings.backupninja %}
+{% set defaults = salt['defaults.merge'](defaults, os_family_map) %}
+{% set defaults = salt['defaults.merge'](defaults, salt['pillar.get']('backupninja:lookup', {})) %}
+
+{% set backupninja = salt['pillar.get']('backupninja') %}
+{% set backupninja = salt['defaults.merge'](backupninja, defaults) %}

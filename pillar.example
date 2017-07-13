@@ -3,6 +3,25 @@
 backupninja:
   lookup:
     pkg: backupninja
+    action_defaults:
+      rsync:
+        general:  # defaults
+          mountpoint: /mnt/backup
+          backupdir: myserver
+          format: short
+          days: 7
+        source:
+          from: local  # default
+          include:  # default
+            - /etc
+            - /var/backups/*/
+          exclude:
+            - exclude_folder1
+            - exclude_folder2
+        dest:
+          dest: remote  # default
+          user: myuser
+          id_file: /root/.ssh/id_rsa  # default
 
   actions:
     10-stop-services.sh:
@@ -11,11 +30,14 @@ backupninja:
         - dovecot
     11-custom.sh: |
       sleep 1  # your shell code here
-    20-db1.mysql:
-      # TODO
+    20-all-databases.mysql: {}  # use default config from map.jinja
+    21-db1_db2.mysql:
+      databases: 'db1 db2'
     30-start-services.sh:
       start_services:
         - dovecot
         - postfix
     40-transfer.rsync:
-      # TODO
+      dest:
+        host: myhostname
+        port: 22

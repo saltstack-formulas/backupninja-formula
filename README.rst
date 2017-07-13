@@ -24,6 +24,16 @@ When reading ``pillar.example`` you'll probably notice that Pillar maps directly
     bound to their eco system of formulas. I need(ed) something decoupled, reusable,
     which used the standard SaltStack design patterns (``map.jinja`` & Co.).
 
+.. note::
+
+    Don't forget to add an extra file reference to your ``master`` file if you're using ``salt-ssh``.
+    Otherwise ``macros.jinja`` won't be synced.
+
+    .. code-block:: yaml
+
+        extra_filerefs:
+          - salt://backupninja/macros.jinja
+
 Available states
 ================
 

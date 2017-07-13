@@ -1,10 +1,30 @@
-{%  macro render_options(data) -%}
-{%    for key, value in data | dictsort 
-        %}{{ key }}{%
-        if key|upper == key %}={% else %} = {% endif %}{%
-        if value is sameas True %}yes{%
-        elif value is sameas False %}no{%
-        else %}{{ value }}{%
-        endif %}
-{%    endfor %}
+{%- macro render_ini_option(key, value) %}
+{%-   set eql = '=' if key|upper == key else ' = ' %}
+{%-   if value is sameas True %}
+{%-     set value = 'yes' %}
+{%-   elif value is sameas False %}
+{%-     set value = 'no' %}
+{%-   else %}
+{#-     keep value as it is #}
+{%-   endif -%}
+{{ key }}{{ eql }}{{ value }}
+{%- endmacro %}
+
+{%- macro render_ini_segment(title, data) -%}
+[{{title}}]
+{{ render_ini_options(data) }}
+{%- endmacro %}
+
+{%- macro render_ini_options(data) %}
+{%-   for key, value in data | dictsort %}
+{%-     if value is mapping %}{# dict #}
+{{        render_ini_segment(key, value) }}
+{%-     elif value is iterable and not value is string -%}{# list #}
+{%-       for element in value -%}
+{{          render_ini_option(key, element) }}
+{%        endfor %}
+{%-     else -%}
+{{        render_ini_option(key, value) }}
+{%      endif %}
+{%-   endfor %}
 {%- endmacro %}

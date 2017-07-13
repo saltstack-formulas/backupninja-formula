@@ -1,0 +1,4 @@
+{% from "backupninja/map.jinja" import backupninja with context -%}
+{% from "backupninja/macros.jinja" import render_ini_options with context -%}
+
+{{ render_ini_options(config) }}

@@ -1,5 +1,5 @@
 set +e
-{% for service in services -%}
+{% for service in config.stop_services -%}
 invoke-rc.d {{ service }} stop
 {% endfor -%}
 
