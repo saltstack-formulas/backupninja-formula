@@ -26,12 +26,14 @@ When reading ``pillar.example`` you'll probably notice that Pillar maps directly
 
 .. note::
 
-    Don't forget to add an extra file reference to your ``master`` file if you're using ``salt-ssh``.
-    Otherwise ``macros.jinja`` won't be synced.
+    Don't forget to add extra file references to your ``master`` file if you're using ``salt-ssh``.
+    Otherwise ``macros.jinja`` & Co. won't be synced.
 
     .. code-block:: yaml
 
         extra_filerefs:
+          - salt://backupninja/defaults.yaml
+          - salt://backupninja/map.jinja
           - salt://backupninja/macros.jinja
 
 Available states
