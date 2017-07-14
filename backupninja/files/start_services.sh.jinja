@@ -1,4 +1,0 @@
-set +e
-{% for service in config.start_services -%}
-invoke-rc.d {{ service }} start
-{% endfor -%}

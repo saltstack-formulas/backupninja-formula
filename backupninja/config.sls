@@ -30,23 +30,21 @@ backupninja-action-{{ filename }}:
     - mode: 640
     - context:
         config: {{ config }}
-{%      if config is mapping %}
+{%      if config is mapping and not config is string %}
 {#-
       +++++ shell actions +++++ #}
 {%-       if type == 'sh' %}
     - template: jinja
-{%-         if "start_services" in config %}
-    - source: salt://backupninja/files/start_services.sh.jinja
-{%-         elif "stop_services" in config %}
-    - source: salt://backupninja/files/stop_services.sh.jinja
-{%-         endif %}
+    - source: {{ config.get('template', 'salt://backupninja/files/generic.sh.jinja') }}
+    - context:
+        config: {{ config }}
 {%-       else %}
 {#
       +++++ default: ini-style actions +++++ #}
     - template: jinja
     - source: salt://backupninja/files/ini.jinja
 {%-       endif %}
-{%-     else %}
+{%-     elif config is string %}
     - contents: |
         {{ config | indent(8) }}
 {%-     endif %}

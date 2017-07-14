@@ -1,0 +1,22 @@
+{%- if 'start_services' in config %}
+{%-   for service in config.start_services %}
+invoke-rc.d {{ service }} start || fatal "failed to start service {{ service }}"
+{%-   endfor %}
+{%- endif %}
+
+{%- if 'rsync' in config %}
+{%-   set rsync = config.rsync %}
+{%-   set log = rsync.get('log', '/var/log/backup/custom-rsync.log') %}
+mkdir -p `dirname "{{ log }}"`
+{{ rsync.get('command', 'rsync') }} \
+  --rsh 'ssh -p {{ rsync.get('port', 22) }}' \
+  --log-file {{ log }} \
+  {{ rsync.args }} \
+  {{ rsync.from }} {{ rsync.to }} || fatal "rsync failed"
+{%- endif %}
+
+{%- if 'stop_services' in config %}
+{%-   for service in config.stop_services %}
+invoke-rc.d {{ service }} stop || fatal "failed to stop service {{ service }}"
+{%-   endfor %}
+{%- endif %}
