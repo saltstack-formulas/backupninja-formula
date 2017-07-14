@@ -13,38 +13,44 @@ backupninja-config:
 
 {%  for filename, config_update in salt["pillar.get"]('backupninja:actions', {})|dictsort %}
 {%-   set type = filename.split('.')|last %}
-{%-   if config_update is string %}
-{%-     set config = config_update %}
-{%-   else %}
+{%-   if config_update is mapping %}
 {%-     set config = backupninja.action_defaults.get(type, {}) %}
 {%-     set config = salt['defaults.merge'](config, config_update) %}
+{%-   else %}
+{%-     set config = config_update %}
 {%-   endif %}
 backupninja-action-{{ filename }}:
+{%-   set name = backupninja.config.configdirectory + "/" + filename %}
+{%    if config is sameas False %}
+  file.absent:
+    - name: {{ name }}
+{%    else %}
   file.managed:
-    - name: {{ backupninja.config.configdirectory }}/{{ filename }}
-    - require_in:
-      - file: backupninja-config  # use its check_cmd
+    - name: {{ name }}
     - mode: 640
     - context:
         config: {{ config }}
-{%    if not config is string %}
+{%      if config is mapping %}
 {#-
       +++++ shell actions +++++ #}
-{%-     if type == 'sh' %}
+{%-       if type == 'sh' %}
     - template: jinja
-{%-       if "start_services" in config %}
+{%-         if "start_services" in config %}
     - source: salt://backupninja/files/start_services.sh.jinja
-{%-       elif "stop_services" in config %}
+{%-         elif "stop_services" in config %}
     - source: salt://backupninja/files/stop_services.sh.jinja
-{%-       endif %}
-{%-     else %}
+{%-         endif %}
+{%-       else %}
 {#
       +++++ default: ini-style actions +++++ #}
     - template: jinja
     - source: salt://backupninja/files/ini.jinja
-{%-     endif %}
-{%-   else %}
+{%-       endif %}
+{%-     else %}
     - contents: |
         {{ config | indent(8) }}
+{%-     endif %}
 {%-   endif %}
+    - require_in:
+      - file: backupninja-config  # use its check_cmd
 {%- endfor %}
