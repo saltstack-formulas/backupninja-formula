@@ -8,6 +8,9 @@ invoke-rc.d {{ service }} start || fatal "failed to start service {{ service }}"
 {%-   set rsync = config.rsync %}
 {%-   set log = rsync.get('log', '/var/log/backup/custom-rsync.log') %}
 mkdir -p `dirname "{{ log }}"`
+{%-   if rsync.get('truncate_log', False) %}
+truncate -s0 "{{ log }}"
+{%-   endif %}
 {{ rsync.get('command', 'rsync') }} \
   --rsh 'ssh -p {{ rsync.get('port', 22) }}' \
   --log-file {{ log }} \
