@@ -29,4 +29,4 @@ that differ from whats in defaults.yaml
 {% set defaults = salt['defaults.merge'](defaults, salt['pillar.get']('backupninja:lookup', {})) %}
 
 {% set backupninja = salt['pillar.get']('backupninja') %}
-{% set backupninja = salt['defaults.merge'](backupninja, defaults) %}
+{% set backupninja = salt['defaults.merge'](defaults, backupninja) %}
