@@ -29,8 +29,8 @@ backupninja-action-{{ filename }}:
     - name: {{ name }}
     - mode: 640
     - context:
-        config: {{ config }}
 {%      if config is mapping and not config is string %}
+        config: {{ config }}
 {#-
       +++++ shell actions +++++ #}
 {%-       if type == 'sh' %}
