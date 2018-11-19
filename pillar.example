@@ -14,7 +14,7 @@ backupninja:
           from: local  # default
           include:  # default
             - /etc
-            - /var/backups/*/
+            - /var/backups/
           exclude:
             - exclude_folder1
             - exclude_folder2
