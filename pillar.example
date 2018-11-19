@@ -36,9 +36,18 @@ backupninja:
         port: 22 # default
         log: /var/log/backup/custom-rsync.log  # default
         truncate_log: False  # default. (Set this to True when no log rotation is present.)
-        from: /etc/
+        from: /etc/ /var/backups/
+        # alternate form for 'from':
+        from:
+          - /etc/
+          - /var/backups/
         to: user@host:backup
         args: --recursive --times --delete
+        # alternate form for 'args':
+        args:
+          - '--recursive'
+          - '--times'
+          - '--delete'
     13-custom.sh:
       template: salt://backupninja/files/my_custom_template.sh.jinja
       var1: a
