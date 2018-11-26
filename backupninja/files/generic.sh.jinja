@@ -14,8 +14,17 @@ truncate -s0 "{{ log }}"
 {{ rsync.get('command', 'rsync') }} \
   --rsh 'ssh -p {{ rsync.get('port', 22) }}' \
   --log-file {{ log }} \
+{%-   if rsync.args is string %}
   {{ rsync.args }} \
-  {{ rsync.from }} {{ rsync.to }} || fatal "rsync failed"
+{%-   else %}
+  {{ rsync.args | join(' ') }} \
+{%-   endif %}
+{%-   if rsync.from is string %}
+  {{ rsync.from }} \
+{%-   else %}
+  {{ rsync.from | join(' ') }} \
+{%-   endif %}
+  {{ rsync.to }} || fatal "rsync failed"
 {%- endif %}
 
 {%- if 'stop_services' in config %}
