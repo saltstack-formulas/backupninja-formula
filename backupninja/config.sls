@@ -30,14 +30,14 @@ backupninja-action-{{ filename }}:
     - mode: 640
     - context:
 {%      if config is mapping and not config is string %}
-        config: {{ config }}
+        config: {{ config | json }}
 {#-
       +++++ shell actions +++++ #}
 {%-       if type == 'sh' %}
     - template: jinja
     - source: {{ config.get('template', 'salt://backupninja/files/generic.sh.jinja') }}
     - context:
-        config: {{ config }}
+        config: {{ config | json }}
 {%-       else %}
 {#
       +++++ default: ini-style actions +++++ #}
