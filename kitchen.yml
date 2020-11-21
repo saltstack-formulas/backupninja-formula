@@ -213,7 +213,6 @@ suites:
       state_top:
         base:
           '*':
-            - backupninja._mapdata
             - backupninja
       pillars:
         top.sls:
@@ -221,7 +220,7 @@ suites:
             '*':
               - backupninja
       pillars_from_files:
-        backupninja.sls: pillar.example
+        backupninja.sls: test/salt/pillar/default.sls
     verifier:
       inspec_tests:
         - path: test/integration/default
