@@ -1,7 +1,7 @@
 .. _readme:
 
 backupninja-formula
-================
+===================
 
 |img_travis| |img_sr| |img_pc|
 
@@ -82,19 +82,19 @@ Available states
    :local:
 
 ``backupninja``
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
 Includes ``backupninja.install`` and ``backupninja.config``
 
-``backupninja.installl``
-^^^^^^^^^^^^^^^^^^^^
+``backupninja.install``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Installs the backupninja package(s).
 
 ``backupninja.config``
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 Configures backupninja based on Pillar.
 See ``pillar.example`` for details.

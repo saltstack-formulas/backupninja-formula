@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 # vim: ft=yaml
-
+---
 backupninja:
   lookup:
     pkg: backupninja
@@ -33,26 +34,25 @@ backupninja:
     12-custom-rsync.sh:  # this is for special cases which won't work otherwise
       rsync:
         command: rsync  # default
-        port: 22 # default
+        port: 22  # default
         log: /var/log/backup/custom-rsync.log  # default
-        truncate_log: False  # default. (Set this to True when no log rotation is present.)
+        truncate_log: 'False'  # default (Set to True when no log rotation is present)
         from: /etc/ /var/backups/
         # alternate form for 'from':
-        from:
-          - /etc/
-          - /var/backups/
+        # from:
+        #   - /etc/
+        #   - /var/backups/
         to: user@host:backup
         args: --recursive --times --delete
         # alternate form for 'args':
-        args:
-          - '--recursive'
-          - '--times'
-          - '--delete'
+        # args:
+        #  - '--recursive'
+        #  - '--times'
+        #  - '--delete'
     13-custom.sh:
       template: salt://backupninja/files/my_custom_template.sh.jinja
       var1: a
       var2: b
-    20-all-databases.mysql: {}  # use default config from map.jinja
     20-all-databases.mysql: {}  # use default config from map.jinja
     21-db1_db2.mysql:
       databases: 'db1 db2'
@@ -60,7 +60,7 @@ backupninja:
       start_services:
         - dovecot
         - postfix
-    35-not-needed-any-more.sh: False
+    35-not-needed-any-more.sh: 'False'
     40-transfer.rsync:
       dest:
         host: myhostname

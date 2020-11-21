@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 # vim: ft=yaml
-
+---
 backupninja:
   lookup:
     pkg: backupninja
@@ -31,7 +32,7 @@ backupninja:
         command: rsync
         port: 22
         log: /var/log/backup/custom-rsync.log
-        truncate_log: False
+        truncate_log: 'False'
         from: /etc/ /var/backups/
         to: user@host:backup
         args: --recursive --times --delete

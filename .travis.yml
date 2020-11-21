@@ -100,7 +100,7 @@ jobs:
     # - env: INSTANCE=default-fedora-32-master-py3
     # - env: INSTANCE=default-fedora-31-master-py3
     # - env: INSTANCE=default-opensuse-leap-152-master-py3
-    # - env: INSTANCE=default-amazonlinux-2-master-py3
+    # - env: INSTANCE=default-amazonlinux-2-master-py3
     - env: INSTANCE=default-debian-10-3001-py3
     - env: INSTANCE=default-debian-9-3001-py3
     - env: INSTANCE=default-ubuntu-2004-3001-py3
