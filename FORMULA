@@ -1,6 +1,6 @@
 name: backupninja
-os: Debian, Ubuntu, Raspbian, RedHat, Fedora, CentOS, Amazon
-os_family: Debian, RedHat, Suse, Gentoo, Arch
+os: Debian, Ubuntu
+os_family: Debian
 version: 1.0.0
 release: 1
 minimum_version: 2019.2
