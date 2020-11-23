@@ -1,0 +1,9 @@
+name: backupninja
+os: Debian, Ubuntu
+os_family: Debian
+version: 1.0.0
+release: 1
+minimum_version: 2019.2
+summary: backupninja formula
+description: Formula to install and configure backupninja
+top_level_dir: backupninja

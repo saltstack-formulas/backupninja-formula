@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 # vim: ft=jinja
 
-{## Start with  defaults from defaults.sls ##}
+{# Start with  defaults from defaults.sls #}
 {% import_yaml 'backupninja/defaults.yaml' as default_settings %}
 
-{##
-Setup variable using grains['os_family'] based logic, only add key:values here
-that differ from whats in defaults.yaml
-##}
+{# Setup variable using grains['os_family'] based logic, only add key:values here
+that differ from whats in defaults.yaml #}
 {% set os_family_map = salt['grains.filter_by']({
         'Debian': {},
         'Suse': {},

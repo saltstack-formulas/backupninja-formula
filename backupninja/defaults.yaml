@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
+---
 backupninja:
   pkg: backupninja
   # Don't clutter the system with stuff you may never need
-  install_recommends: False
+  install_recommends: 'False'
   # Install necessary packages manually
   additional_pkgs: []
   configfile: '/etc/backupninja.conf'
@@ -11,10 +12,10 @@ backupninja:
   config:
     loglevel: 4
     reportemail: root
-    reportsuccess: yes
-    reportinfo: no
-    reportwarning: yes
-    reportspace: no
+    reportsuccess: 'yes'
+    reportinfo: 'no'
+    reportwarning: 'yes'
+    reportspace: 'no'
     reporthost: ''
     reportuser: ninja
     reportdirectory: /var/lib/backupninja/reports
@@ -23,16 +24,16 @@ backupninja:
     configdirectory: /etc/backup.d
     scriptdirectory: /usr/share/backupninja
     libdirectory: /usr/lib/backupninja
-    usecolors: yes
+    usecolors: 'yes'
     when: everyday at 01:00
-    vservers: no
+    vservers: 'no'
   action_defaults:
     mysql:
       databases: all
       backupdir: /var/backups/mysql
-      hotcopy: no
-      sqldump: yes
-      compress: yes
+      hotcopy: 'no'
+      sqldump: 'yes'
+      compress: 'yes'
     rsync:
       general:
         mountpoint: /mnt/backup
